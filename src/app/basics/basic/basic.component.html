@@ -1,0 +1,77 @@
+<nav class="nav">
+    <img src="assets/images/CodeHeroS.png" style = 'margin-right: auto;' >
+    <!-- <img src="/images/CodeHero.png"style= "float:center"> -->
+    <ul>
+
+    <li><a href="/style.css">CSS</a> </li>
+    <li><a href='https://github.com/PatoGMTP/TS_Research.git'>Github</a></li>
+
+    <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Resources</a>
+        <div class="dropdown-content">
+          <a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html">Primitives</a>
+          <a href="https://www.codecademy.com/learn/learn-typescript/modules/learn-typescript-complex-types/cheatsheet">Complex Type</a>
+          <a href="https://www.typescriptlang.org/docs/handbook/type-inference.html">Type inference</a>
+          <a href="https://www.tutorialsteacher.com/typescript/typescript-union">Unions </a>
+          <a href="https://www.tutorialsteacher.com/typescript/typescript-tuple">Tuples</a>
+          <a href="https://www.digitalocean.com/community/tutorials/typescript-type-alias">Type Aliases</a>
+        </div>
+      </li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn"  >About</a>
+        <div class="dropdown-content">
+          <a href="https://github.com/PatoGMTP">Patricio Garcia</a>
+          <a href="https://www.github.com/trigus00">Gustavo Mendoza</a>
+         
+        </div>
+      </li>
+    </ul>
+</nav>
+
+<div class="main">
+
+    <div class="topic_bar">
+        <button id='topic1' class="topic1">Primitive types</button>
+        <button id='topic2' class="topic2"> Complex types</button>
+        <button id='topic3' class="topic3">Type inference </button>
+        <button id='topic4' class="topic4">Union Types </button>
+        <button id='topic5' class="topic5">Tuples </button>
+        <button id='topic6' class="topic6">Type Aliases</button>
+        
+    </div>
+    <div class="content">
+        <div class="boxes">
+            <textarea name="stuff" id="text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut efficitur lacus. &#13;,&#10; Praesent ultricies at nulla vel pulvinar. Cras non enim ac felis semper gravida ac non nisi. Nam pretium ac augue et varius. Nullam varius elit fringilla, tincidunt lacus nec, pellentesque leo. Suspendisse euismod eros sit amet interdum mollis. Nullam faucibus magna in diam lacinia, id porta sem euismod. Ut pulvinar neque vitae purus hendrerit faucibus. Vivamus et eleifend tortor. Sed facilisis sem arcu, et mattis dui elementum at. Aenean imperdiet justo at nisl porttitor, id tempus ligula lobortis.
+            </textarea> 
+            <textarea #textarea (keyup.enter) = "terminalClick(textarea)" [(ngModel)]= 'currentText' > 
+
+            </textarea>
+        </div>
+        
+        <div class="slideshow-container">
+            <div #slide1 class="mySlides fade" (click) = "myFunction(slide1,slide2)">
+                
+                <img id="image1" src=""  style = "width: 100%;">
+               
+            </div>
+            <div #slide2 class="mySlides fade"  (click) = "myFunction(slide2,slide3)" style = "display: none;">
+               
+                <img id="image2" src="" style = "width:100%;" >
+        
+            </div>
+            <div #slide3 class="mySlides fade"  (click) = "myFunction(slide3,slide1)" style="display:none ">
+                
+                <img id="image3" src="" style = "width:100%;">
+          
+            </div>
+
+         </div>
+    </div>
+</div>
+
+
+
+<footer style="background-color: bisque; border-radius: 20px; width: 100%; text-align:center;">
+    Made with <span style="color: #e25555;">&#9829;</span> love by Code Hero
+</footer>

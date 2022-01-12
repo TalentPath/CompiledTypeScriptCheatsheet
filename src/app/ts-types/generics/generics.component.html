@@ -1,0 +1,63 @@
+<div class="genericscontainer">
+    <div class="container">
+        <h1>Generics</h1>
+        <p class="info">Generics offer a way to create reusable components. Generics provide a way to make components
+            work with any
+            data type and not restrict to one data type. So, components can be called or used with a variety of data
+            types.
+        </p>
+        <div class="code" style="width: 500px; height: 305px;">
+            <p>function getArray&lt;T&gt;(items : T[] ) : T[] &#123;</p>
+            <p class="indent">return new Array&lt;T&gt;().concat(items);</p>       
+            <p>&#125;</p><br>
+            <p>let myNumArr = getArray&lt;number&gt;([100, 200, 300]);</p>
+            <p>let myStrArr = getArray&lt;string&gt;(["Hello", "World"]);</p><br>
+            <p>myNumArr.push(400); // OK</p>
+            <p>myStrArr.push("Hello TypeScript"); // OK</p><br>
+            <p>myNumArr.push("Hi"); // Compiler Error</p>
+            <p>myStrArr.push(500); // Compiler Error</p>
+        </div><br>
+        <p class="info">In the above example, the type variable T is specified with the function in the angle brackets
+            getArray&lt;T&gt;.
+            The type variable T is also used to specify the type of the arguments and the return value. This means
+            that the data type which will be specified at the time of a function call, will also be the data type of
+            the arguments and of the return value.
+        </p>
+        <h2>Example:</h2>
+        <div class="code" style="width: 350px; height: 110px;">
+            <p>function lastItem&lt;T&gt;(arr: T[]): T &#123;</p>
+            <p class="indent">return arr[arr.length - 1];</p>       
+            <p>&#125;</p><br>
+            </div><br>
+        <div class="exampleforms">
+            <div class="numberarrdiv">
+                <form>
+                    <label>Enter a number for all;</label><br>
+                    <input #a type="number"><br>
+                    <input #b type="number"><br>
+                    <input #c type="number"><br>
+                    <input #d type="number"><br>
+                    <input #e type="number"><br>
+                    <input id="numSubmit" type="submit" value="Submit"
+                        (click)="addToNumArr(a.value,b.value,c.value,d.value,e.value,$event)"><br>
+                    <p class="code" style="width: 60%; margin: 10px auto;"><span *ngIf="showNumRes==true">The number {{lastItem(numArray)}} is the last item of the [{{numArray}}]
+                        array</span></p>
+                </form>
+            </div>
+            <div class="stringarrdiv">
+                <form>
+                    <label>Enter a text for all;</label><br>
+                    <input #aa type="input"><br>
+                    <input #bb type="input"><br>
+                    <input #cc type="input"><br>
+                    <input #dd type="input"><br>
+                    <input #ee type="input"><br>
+                    <input id="strSubmit" type="submit" value="Submit"
+                        (click)="addToStrArr(aa.value,bb.value,cc.value,dd.value,ee.value,$event)"><br>
+                    <p class="code" style="width: 60%; margin: 10px auto;"><span *ngIf="showStrRes==true">The string {{lastItem(strArray)}} is the last item of the [{{strArray}}]
+                        array</span></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

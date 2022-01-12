@@ -1,0 +1,136 @@
+<div id="types-container">
+
+    <h1>Custom Types</h1>
+        <p>Custom types are a way to use Typescript to define the specific properties that
+            are to be used on an object.  This is by calling the type keyword and defining the 
+            object's properties as well as their datatypes.  This is very similar to using as interface 
+            (see interface page for more information).  Through this lesson we will be building 
+            a voter record type and seeing some examples of it in action.  First, here is an example
+            of the Voter type:
+        </p>
+        <div class="code">
+            <p>type Voter = &#123;</p>
+            <p class="indent">name: string,</p>       
+            <p class="indent">age: number,</p>
+            <p class="indent">registered: boolean</p>
+            <p>&#125;</p>
+        </div><br>
+        <p>Note that the Voter object has 3 properties: name, age and registered, 
+            which have values of string, number, and boolean, respectively.  To be valid it must
+            only have those 3 specific properties and they must each have their specific data type. 
+            Here are some examples of valid and invalid Todos:
+        </p><br>
+        <div class = "examples">
+    
+            <div class="code">
+                <h3>Valid</h3>
+                <p>const voter1: Voter = &#123;</p>
+                <p class="indent">name: 'Joe',</p>       
+                <p class="indent">age: 25,</p>
+                <p class="indent">registered: true</p>
+                <p>&#125;</p>
+            </div><br>
+            <div class="code">
+                <h3>Invalid</h3>
+                <p>const voter2: Voter = &#123;</p>
+                <p class="indent">name: 'Jessica',</p>       
+                <p class="indent">age: 42,</p>
+                <p class="indent">registered: 'Yes'</p>
+                <p>&#125;</p>
+                <p>// Notice that registered is a string instead of a boolean</p>
+            </div><br>
+            <div class="code">
+                <h3>Invalid</h3>
+                <p>const voter3: Voter = &#123;</p>
+                <p class="indent">name: 'Timmy',</p>       
+                <p class="indent">age: 5</p>
+                <p>&#125;</p>
+                <p>// Invalid because it is missing the registered property</p>
+            </div><br>
+            <div class="code">
+                <h3>Invalid</h3>
+                <p>const voter4: Voter = &#123;</p>
+                <p class="indent">name: 'Courtney',</p>       
+                <p class="indent">age: 21,</p>
+                <p class="indent">registered: true,</p>
+                <p class="indent">favoriteFood: 'sushi'</p>
+                <p>&#125;</p>
+                <p>// FavoriteFood definitely does not belong on a voter record</p>
+            </div><br>
+        </div>
+        <p>Once again, to correctly follow the custom type the object must have all the same properties 
+            as the interface, it must have no extra properties, and the types must match those
+            listed in the type definition.</p><br>
+        <p>A type can also be used to define a function. Here is an example
+            of a typed function: </p>
+        <div class="code">
+            <p>type VoterFunc = &#123;</p>
+            <p class="indent">(voter: Voter, voters: Voter[]): void</p>       
+            <p>&#125;</p>
+        </div><br>
+        <p>In this specific function type, the function will take in 2 parameters: 
+            voter which is a Voter type and voters which is an array of voters.  It then has a 
+            void return value meaning nothing is returned. Here is an example of the 
+            implementation of our VoterFunc type:</p>
+        <div class="code">
+            <p>const addVoter:VoterFunc = (voter: Voter, voters: Voter[]): void => &#123;</p>
+            <p class="indent">voters.push(voter)</p>       
+            <p>&#125;</p>
+        </div><br>
+        <p>In this function we are taking a Voter and adding it to an array of Voters.</p>
+        <p>Now let's see if we can build our own Voters following our Voter type</p>
+        <div class="code" id="sample">
+            <h2>Voter Type</h2>
+            <p>type Voter = &#123;</p>
+            <p class="indent">name: string,</p>       
+            <p class="indent">age: number,</p>
+            <p class="indent">registered: boolean</p>
+            <p>&#125;</p>
+        </div>
+        <div id="play-box">
+            <h2>Build a Voter that fits the type above to add it to the list:</h2>
+            <div class="code">
+            <form id="voter-form">
+                <label class="indent" for="property">Property:</label>
+                <input #property name="property" type="text"><br>
+                <label class="indent" for="value">Value:</label>
+                <input #value name="value" type="text"><br>
+                <button id="form-button" (click)="addProperty(property.value, value.value, $event); property.value = ''; value.value = ''" *ngIf="submit" type="submit">Add</button>
+            </form>
+                <p>const voter: Voter = &#123;</p>
+                <div id="voter-inner" *ngFor="let item of voterKeys; let i = index">
+                    <p class="indent">{{item}}: {{voterValues[i]}}</p>
+                </div>
+                <p>&#125;</p>
+                <div id="success3" *ngIf="success">
+                    <img src="../../assets/images/checkmark-24.png" width="16px">
+                    <p>You Got It!</p>
+                </div>
+                <div id="wrong3" *ngIf="wrong">
+                    <img src="../../assets/images/x-mark-24.png" width="16px">
+                    <p>Not Quite. Try again</p>
+                </div>
+                <button id="submit3" *ngIf="submit" (click)="checkAnswer($event)">Submit</button>
+                <button id="reset3" (click)="reset($event)" *ngIf="active">Reset</button>
+            </div>
+        </div>
+        <div class="code">
+            <h2>Voter List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Age</td>
+                        <td>Registered</td>
+                    </tr>
+                </thead>
+                <tbody id="voter-list" *ngFor="let voter of voters">
+                    <tr>
+                        <td>{{voter.name}}</td>
+                        <td>{{voter.age}}</td>
+                        <td>{{voter.registered}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+</div>

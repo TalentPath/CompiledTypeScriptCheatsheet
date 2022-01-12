@@ -1,0 +1,109 @@
+<span *ngFor="let planet of listOfPlanets; let i = index">
+    <h1>
+        Planet <span class="planet-name" [style.display]="planet.edit? 'none': 'inline'">{{planet.planetName}}</span> 
+        <input type="text" value="{{planet.planetName}}" class="name-field" #newName [style.display]="planet.edit? 'inline': 'none'">
+        <input type="button" value="Edit" class="name-edit" (click)="editMode(i)" [style.display]="planet.edit? 'none': 'inline'">
+        <input type="button" value="OK" class="ok-button" [style.display]="planet.edit? 'inline': 'none'" (click)="editName(i, newName.value)">
+    </h1>
+    <p>Radius: {{planet.size}}
+    <br>Parent Star: {{planet.parentStar}}
+    <br><span *ngIf="returnType(i) == 'rocky'">{{returnElements(planet)}}</span>
+    <span *ngIf="returnType(i) == 'gas'">{{returnElements(planet)}}</span>
+    <span *ngIf="returnType(i) == 'ice'">{{returnElements(planet)}}</span>
+</span>
+
+<div>
+    <h2>Add planet to inventory (admins only)</h2>
+    <div #accessDiv [ngClass]="showPlanetInfo ? 'hide' : 'show'">
+        <input #pass (keyup.enter) = "displayInput(pass.value); pass.value='' " >
+        <button (click) = "displayInput(pass.value); pass.value='' ">Get Access</button>
+    </div>
+    
+
+    <div [ngClass]="showPlanetInfo ? 'show' : 'hide'">
+        <label for="planetName">Planet Name:</label>
+        <input type="text" #planetName ><br>
+        <label for="planetSize">Size (miles)</label>
+        <input type='number' #planetSize ><br>
+        <label for="planetParent">Parent Star</label>
+        <input type='text' #planetParent ><br>
+        <select name="planetTypeDropdown" #planetTypeDropdown (change) = displayElements(planetTypeDropdown.value)>
+            <option value="select">Select Type</option>
+            <option value="rocky">Rocky Planet</option>
+            <option value="gas">Gas Giant</option>
+            <option value="ice">Ice Giant</option>
+        </select>
+    </div>
+
+    <div [ngClass] ="planetType=='gas' ? 'show' : 'hide'" #gasMixture ngClass='checkbox-form'>
+        <div>
+            <input type="checkbox" #helium (click) = "addElement('helium')" >
+            <label for='helium'>Helium</label>
+        </div>
+        <div>
+            <input type="checkbox" #hydrogen (click) = "addElement('hydrogen')" >
+            <label for='hydrogen'>Hydrogen</label>
+        </div>
+        <button 
+            [ngClass] = "planetType != 'none' ? 'show' : 'hide'" 
+            #submitPlanetBtn ngClass='btn' 
+            (click) = "addPlanet(planetName.value, planetType, {size: convertStringToNumber(planetSize.value), parentStar:planetParent.value, gases: elements});
+            planetName.value = '';
+            planetSize.value='';
+            planetParent.value = '';
+            planetTypeDropdown.value = 'select' " 
+            >Submit
+        </button>
+    </div>
+
+    <div [ngClass]="planetType=='rocky' ? 'show' : 'hide'" #coreElements ngClass='checkbox-form'>
+        <div>
+            <input type="checkbox" #iron (click) = "addElement('iron')" >
+            <label for='iron'>Iron</label>
+        </div>
+        <div>
+            <input type="checkbox" #nickel (click) = "addElement('nickel')" >
+            <label for='nickel'>Nickel</label>
+        </div>
+        <button 
+            [ngClass] = "planetType != 'none' ? 'show' : 'hide'" 
+            #submitPlanetBtn ngClass='btn' 
+            (click) = "addPlanet(planetName.value, planetType, {size: convertStringToNumber(planetSize.value), parentStar:planetParent.value, coreComponents: elements}); 
+            planetName.value = '';
+            planetSize.value='';
+            planetParent.value = ''; 
+            planetTypeDropdown.value = 'select' " 
+            >Submit
+        </button>
+    </div>
+
+    <div [ngClass]="planetType=='ice' ? 'show' : 'hide'" #fluidElements ngClass='checkbox-form'>
+        <div>
+            <input type="checkbox" #water (click) = "addElement('water')" >
+            <label for='water'>Water</label>
+        </div>
+        <div>
+            <input type="checkbox" #methane (click) = "addElement('methane')" >
+            <label for='methane'>Methane</label>
+        </div>
+        <div>
+            <input type="checkbox" #ammonia (click) = "addElement('ammonia')" >
+            <label for='ammonia'>Ammonia</label>
+        </div>
+        <button 
+            [ngClass] = "planetType != 'none' ? 'show' : 'hide'" 
+            #submitPlanetBtn ngClass='btn' 
+            (click) = "addPlanet(planetName.value, planetType, {size: convertStringToNumber(planetSize.value), parentStar:planetParent.value, fluidElements: elements});
+            planetName.value = '';
+            planetSize.value='';
+            planetParent.value = '';
+            planetTypeDropdown.value = 'select' " 
+            >Submit
+        </button>
+    </div>
+
+    <div>
+        
+    </div>
+  </div>
+

@@ -1,0 +1,91 @@
+<h2 class="mb-4">Typescript Functions</h2>
+<div class="bg-white border rounded-5 p-4">
+    <h4 class="mt-5">Basic JS Function Declaration</h4>
+    <p>A function is a set of statements to perform a specific task. Functions organize the program
+        into logical blocks of code.</p>
+
+    <pre><code  class="language-javascript">
+function  function_name( ) {{ '{' }} } // function definition
+function_name() // function invocation
+
+</code></pre>
+
+    <h4 class="mt-5">Positional parameters in Typescript Function</h4>
+    <ul>
+        <li>Parameters can have a specified type by using the syntax:
+            <ul>
+                <li><code>param_name: type</code></li>
+            </ul>
+        </li>
+        <li>Parameters without a specified type are considered of type <em>any</em></li>
+        <li>Parameters can be made optional with '?' by using the syntax
+            <ul>
+                <li> <code>param_name?: type</code></li>
+            </ul>
+        </li>
+        <li>Parameters can be given a default value with '=' just like in regular JS functions.</li>
+        <li>Note that a parameter can't be optional and have a default value</li>
+    </ul>
+    <pre><code  class="language-javascript">
+function  function_name(p1: string = "hello", p2?: number) {{ '{' }}   
+    console.log(p1);                                
+    console.log(p2);                                
+} 
+
+</code></pre>
+
+    <h4 class="mt-5">Typescript Function Types</h4>
+    <ul>
+        <li>
+            Function types can be written as a call signature in an object type:
+            <ul>
+                <li>The following code is defining a function type with one parameter, named a (of
+                    type string) that doesn’t return anything:
+                <li><code>type GreetFunction = {{ '{' }}(a: string): void;};</code></li>
+            </ul>
+        </li>
+        <li>The below code is exactly the same code as above but written in shorthand form (similar
+            to an arrow function):
+            <ul>
+                <li><code>(a: string) => void</code></li>
+            </ul>
+        </li>
+        <li>A type alias can be used to name a shorthand function type:
+            <ul>
+                <li>
+                    <code>type GreetFunction = (a: string) => void;</code>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <pre><code  class="language-javascript">
+// define function type  
+type GreetFunction = (a: string) => void;     
+
+// implement function of type GreetFuncti
+function printToConsole(s: string) {{ '{' }}    
+    console.log(s);                     
+}                                           
+
+// implement function that gets a parameter of type GreetFunction
+function greeter(fn: GreetFunction) {{ '{' }}   
+    fn("Hello, World");                 
+}                                           
+
+// invoke function greeter               
+greeter(printToConsole);  
+
+</code></pre>
+    <h4 class="mt-5">Typescript Function Interfaces</h4>
+    <ul>
+        <li>
+            Function interfaces are used exactly the same way as types but have a slightly different
+            syntax:
+            <ul>
+                <li>The following code shows the same call signature as the type examples above, but
+                    as an interface:
+                <li><code>interface SearchFunc {{ '{' }}(a: string): void;}</code></li>
+            </ul>
+        </li>
+    </ul>
+</div>

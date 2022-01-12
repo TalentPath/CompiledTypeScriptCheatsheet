@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-family: 'Dosis', sans-serif;
+}
+
+.info{
+    margin: 20px 10px;
+}
+
+.textarea{
+    margin: 10px;
+}
+
+.numberarrdiv, .stringarrdiv {
+    width: 400px;
+    text-align: center;
+}
+
+.exampleforms{
+    display: flex;
+}
+
+.unionscontainer {
+    width: 100%;
+    margin: auto;
+    background-color: lightsteelblue;
+    opacity: .7;
+    padding: 5%;
+}
+
+p {
+    letter-spacing: .1rem;
+    line-height: 1.5rem;
+}
+
+ul {
+    display: flex;
+}
+
+li {
+    list-style: none;
+    padding: 10px;
+}
+
+nav {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+a:hover {
+    background-color: grey;
+    color: lightsteelblue;
+    transition: .5s background-color, .5s color;
+}
+
+.code {
+    background-color: #eee;
+    border: 1px solid #999;
+    display: block;
+    padding: 20px;
+    width: 45%;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.indent {
+    text-indent: 40px;
+}
+
+.examples {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+input, select {
+    padding: 5px;
+    border-radius: 10px;
+    margin: 2px;
+    cursor: pointer;
+}
+button {
+    padding: 5px;
+    border-radius: 10px;
+    background-color: lightsteelblue;
+    cursor: pointer;
+}
+
+img {
+    margin-right: 5px;
+}
+
+#success p {
+    color: green;
+}
+
+#success, #wrong {
+    margin-top: 5px;
+}
+
+#wrong p {
+    color: red;
+}
+td {
+    padding: 5px;
+}
+
+#index-main {
+    width: 100vw;
+    height: 90vh;   
+}

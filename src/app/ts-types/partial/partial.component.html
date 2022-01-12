@@ -1,0 +1,212 @@
+<div id="partial-container">
+
+    <h1>Partial/Required</h1>
+        <P>Partial and Required are ways that we can still use a specific type or interface but
+            changing the rules for which properties we need to include.  But before talking about 
+            Partial and Required we first need to look at optional properties.
+        </P><br>
+        <p>An optional property is a property that is included in the interface or type definition 
+            but if it is not included it won't cause an error.  We define a property as optional 
+            by including a ? after the property name.  Let's look at our Voter type again but This
+            time with optional properties: 
+        </p><br>
+        <div class="code">
+            <p>type Voter = &#123;</p>
+            <p class="indent">name: string,</p>       
+            <p class="indent">age: number,</p>
+            <p class="indent">registered?: boolean</p>
+            <p>&#125;</p>
+            <p>// registered is now optional</p>
+        </div><br>
+        <p>The registered property is now listed as optional.  Let's look at some examples to see 
+            how this changes our results:
+        </p><br>
+        <div class="examples">
+    
+            <div class="code">
+                <h3>Valid</h3>
+                <p>const voter1: Voter = &#123;</p>
+                <p class="indent">name: 'Joe',</p>       
+                <p class="indent">age: 25,</p>
+                <p class="indent">registered: true</p>
+                <p>&#125;</p>
+                <p>// This example still has all the properties with the proper types so it remains valid</p>
+            </div><br>
+            <div class="code">
+                <h3>Invalid</h3>
+                <p>const voter2: Voter = &#123;</p>
+                <p class="indent">name: 'Jessica',</p>       
+                <p class="indent">age: 42,</p>
+                <p class="indent">registered: 'Yes'</p>
+                <p>&#125;</p>
+                <p>// Even if a property is optional if included it must adhere to the specific type defined</p>
+            </div><br>
+            <div class="code">
+                <h3>Valid</h3>
+                <p>const voter3: Voter = &#123;</p>
+                <p class="indent">name: 'Timmy',</p>       
+                <p class="indent">age: 5</p>
+                <p>&#125;</p>
+                <p>// This example is now valid since registered is optional</p>
+            </div><br>
+            <div class="code">
+                <h3>Invalid</h3>
+                <p>const voter4: Voter = &#123;</p>
+                <p class="indent">name: 'Courtney',</p>       
+                <p class="indent">age: 21,</p>
+                <p class="indent">registered: true,</p>
+                <p class="indent">favoriteFood: 'sushi'</p>
+                <p>&#125;</p>
+                <p>// FavoriteFood still does not belong on a voter record</p>
+            </div><br>
+        </div>
+        <p>It is important to remember that an optional property if included must be of the 
+            proper type. Otherwise, it will cause an error.
+        </p><br>
+        <p>The Partial type allows you to use a specific custom type but then assign all the 
+            values to optional. Here are some examples and how it affects the results:
+        </p><br>
+        <div class="examples">
+    
+            <div class="code">
+                <h3>Valid</h3>
+                <p>const voter5: Partial&lt;voter&gt; = &#123;</p>
+                <p class="indent">name: 'Joe',</p>       
+                <p class="indent">age: 25,</p>
+                <p class="indent">registered: true</p>
+                <p>&#125;</p>
+                <p>// Of course including all values remains valid</p>
+            </div><br>
+            <div class="code">
+                <h3>Valid</h3>
+                <p>const voter6: Partial&lt;Voter&gt; = &#123;</p>
+                <p class="indent">name: 'Timmy',</p>       
+                <p class="indent">age: 5</p>
+                <p>&#125;</p>
+                <p>// This example is valid since registered is optional</p>
+            </div><br>
+            <div class="code">
+                <h3>Valid</h3>
+                <p>const voter7: Partial&lt;Voter&gt; = &#123;&#125;</p>
+                <p>// With partials an empty object is valid since none of the properties are required</p>
+            </div><br>
+            <div class="code">
+                <h3>Invalid</h3>
+                <p>const voter8: Partial&lt;Voter&gt; = &#123;</p>
+                <p class="indent">name: 'Courtney',</p>       
+                <p class="indent">age: 21,</p>
+                <p class="indent">registered: true,</p>
+                <p class="indent">favoriteFood: 'sushi'</p>
+                <p>&#125;</p>
+                <p>// FavoriteFood still does not belong on a voter record</p>
+            </div><br>
+        </div>
+        <p>Required does exactly the opposite of Partial: all the properties beome required.
+            If none of the properties were set to optional in the first place then this will not
+            change anything.  However, if there are optional properties and you want to ensure
+            all the properties are there, you can use Required.  Here are some examples:
+        </p><br>
+        <div class="examples">
+    
+            <div class="code">
+                <h3>Valid</h3>
+                <p>const voter9: Required&lt;voter&gt; = &#123;</p>
+                <p class="indent">name: 'Joe',</p>       
+                <p class="indent">age: 25,</p>
+                <p class="indent">registered: true</p>
+                <p>&#125;</p>
+                <p>// Of course including all values remains valid</p>
+            </div><br>
+            <div class="code">
+                <h3>Invalid</h3>
+                <p>const voter10: Required&lt;Voter&gt; = &#123;</p>
+                <p class="indent">name: 'Timmy',</p>       
+                <p class="indent">age: 5</p>
+                <p>&#125;</p>
+                <p>// This example is invalid even though the original type definition lists
+                    registered as optional
+                </p>
+            </div><br>
+            <div class="code">
+                <h3>Invalid</h3>
+                <p>const voter11: Required&lt;Voter&gt; = &#123;&#125;</p>
+                <p>// All properites are required</p>
+            </div><br>
+            <div class="code">
+                <h3>Invalid</h3>
+                <p>const voter12: Required&lt;Voter&gt; = &#123;</p>
+                <p class="indent">name: 'Courtney',</p>       
+                <p class="indent">age: 21,</p>
+                <p class="indent">registered: true,</p>
+                <p class="indent">favoriteFood: 'sushi'</p>
+                <p>&#125;</p>
+                <p>// FavoriteFood still does not belong on a voter record</p>
+            </div><br>
+        </div>
+        <p>Now let's try practicing with Partial and Required.  Here is a reminder of our 
+            Voter type from before:
+        </p>
+        <div class="code" id="sample">
+            <h2>Voter Type</h2>
+            <p>type Voter = &#123;</p>
+            <p class="indent">name: string,</p>       
+            <p class="indent">age: number,</p>
+            <p class="indent">registered?: boolean</p>
+            <p>&#125;</p>
+        </div>
+        <div id="play-box">
+            <h2>Try changing from Partial and Required and try different combinations of
+                properties to see how the behavior changes (note: when adding partials to
+                the voter list you will have undefined values if you omit that property.  That is still
+                acceptable behavior for this exercise):
+            </h2>
+            <div class="code">
+            <label for="change">Change:</label>
+            <select name="change" #change (change)="option = change.value">
+                <option value="Partial">Partial</option>
+                <option value="Required">Required</option>
+            </select>
+            <form id="voter-form2">
+                <label class="indent" for="property">Property:</label>
+                <input #property name="property" type="text"><br>
+                <label class="indent" for="value">Value:</label>
+                <input #value name="value" type="text"><br>
+                <button id="form-button2" (click)="addProperty(property.value, value.value, $event); property.value = ''; value.value = ''" *ngIf="submit" type="submit">Add</button>
+            </form>
+                <p id="begin">const voter: <span>{{option}}</span>&lt;Voter&gt; = &#123;</p>
+                <div id="voter-inner2" *ngFor="let item of voterKeys; let i = index">
+                    <p class="indent">{{item}}: {{voterValues[i]}}</p>
+                </div>
+                <p>&#125;</p>
+                <div id="success2" *ngIf="success">
+                    <img src="../../assets/images/checkmark-24.png" width="16px">
+                    <p>You Got It!</p>
+                </div>
+                <div id="wrong2" *ngIf="wrong">
+                    <img src="../../assets/images/x-mark-24.png" width="16px">
+                    <p>Not Quite. Try again</p>
+                </div>
+                <button id="submit2" *ngIf="submit" (click)="checkAnswer($event)">Submit</button>
+                <button id="reset2" (click)="reset($event)" *ngIf="active">Reset</button>
+            </div>
+        </div>
+        <div class="code">
+            <h2>Voter List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Age</td>
+                        <td>Registered</td>
+                    </tr>
+                </thead>
+                <tbody id="voter-list2" *ngFor="let voter of voters">
+                    <tr>
+                        <td>{{voter.name ? voter.name : ''}}</td>
+                        <td>{{voter.age ? voter.age : ''}}</td>
+                        <td>{{voter.registered ? voter.registered : ''}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+</div>

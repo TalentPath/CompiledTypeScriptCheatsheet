@@ -1,0 +1,70 @@
+<div class="keyofcontainer">
+    <div class="container">
+        <h1>Keyof Type Operator</h1>
+        <p class="info">The keyof operator takes an object type and produces a string or numeric literal union of its
+            keys. The
+            following type P is the same type as “x” | “y”:</p>
+
+        <div class="code">
+            <p>type Point = &#123; x: number; y: number &#125;;</p>
+            <p>type P = keyof Point; //type P is “x” | “y”</p>
+        </div><br>
+
+        <p class="info">If the type has a string or number index signature, keyof will return those types instead:</p>
+
+        <div class="code">
+            <p>type Arrayish = &#123; [n: number]: unknown &#125;;</p>
+            <p>type A = keyof Arrayish; //type A is number</p><br>
+            <p>type Mapish = &#123; [k: string]: boolean &#125;;</p>
+            <p>type M = keyof Mapish; //type M is string | number</p>
+        </div><br>
+
+        <p class="info">Note that in this example, M is string | number — this is because JavaScript object keys are
+            always coerced
+            to a string, so obj[0] is always the same as obj["0"]. keyof types become especially useful when combined
+            with mapped types.</p>
+
+        <h2>Example:</h2>
+
+        <div class="code" style="width: 750px; height: 480px;">
+            <p>interface MealOrder &#123; //MealOrder interface</p>
+            <p class="indent">starter: string;</p>
+            <p class="indent">entre: string;</p>
+            <p class="indent">drink: string;</p>
+            <p class="indent">dessert: string;</p>
+            <p>&#125;</p><br>
+
+            <p>const myOrder: MealOrder = &#123; //myOrder object of type MealOrder</p>
+            <p class="indent">starter: 'salad'</p>
+            <p class="indent">entre: 'pasta'</p>
+            <p class="indent">drink: 'pepsi'</p>
+            <p class="indent">dessert: 'ice cream'</p>
+            <p>&#125;</p><br>
+
+            <p>// Function to change an item of myOrder</p>
+            <p>function changeMenu(order:MealOrder, orderEntry: keyof MealOrder, change:string) &#123;</p>
+            <p class="indent">order[orderEntry] = change;</p>
+            <p>&#125;</p>
+        </div>
+
+        <form id="chageOrderForm" class="changeOrderForm">
+            <label for="orderItem">Choose an item to change:</label>
+            <select #orderitem id="orderItem" name="orderItem">
+                <option value="starter">starter</option>
+                <option value="entre">entre</option>
+                <option value="drink">drink</option>
+                <option value="dessert">dessert</option>
+            </select>
+            <input #newitem type="text" name="newitem" id="newitem">
+            <input type="submit" id="orderChangebtn" class="orderChangebtn"
+                (click)="menuSwitch(orderitem.value,newitem.value,$event)"><br>
+            <p class="code"><span *ngIf="displayRes==true">
+                <p>myOrder now consists of :</p>
+                <p>starter: {{this.myOrder.starter}};</p>
+                <p>entre: {{this.myOrder.entre}};</p>
+                <p>drink: {{this.myOrder.drink}};</p>
+                <p>dessert: {{this.myOrder.dessert}};</p>
+                </span></p>
+        </form>
+    </div>
+</div>

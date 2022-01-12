@@ -1,0 +1,97 @@
+<h2 class="mb-4">Overloading Functions in Typescript</h2>
+<div class="bg-white border rounded-5 p-4">
+    <h4 class="mt-5">What Is Function Overloading?</h4>
+    <p>Overloaded functions have the capability to operate differently on the basis of the input
+        provided to them.
+        In other words, a program can have multiple methods with the same name with different
+        implementation.</p>
+        <ul><li>
+            Remember that "true" function overloading is not possible in JS since only one implementation can exist.
+        </li>
+    <li>
+        Typescript enables a safer way to understand how js can accept different parameters by defining signatures
+    </li></ul>
+    <h4 class="mt-5">Overloading in Typescript</h4>
+    <ul>
+        <li> A function with multiple call signatures is defined as an overloaded function</li>
+        <li>Steps to overload a function:
+            <ol>
+                <li>Declare multiple functions with the same name but different function signature.
+                    The signature can differ in:
+                    <ul>
+                        <li>The data type of the parameter</li>
+                        <li>The number of parameters</li>
+                        <li>The sequence of parameters</li>
+                    </ul>
+                </li>
+                <li>The declaration must be followed by the function definition and it must account
+                    for <strong>all of the signatures</strong>.</li>
+                <li>Lastly, call the overloaded function</li>
+            </ol>
+        </li>
+    </ul>
+    <pre><code  class="language-javascript">
+//STEP 1
+// Example of function declarations with different data types
+function fn1(string):void; 
+function fn1(number):void; 
+
+// Example of function declarations with different sequence of parameters
+function fn2(n1:number,s1:string):void; 
+function fn2(s:string,n:number):void;
+
+// Example of function declarations with a different number of parameters
+function fn3(n1:string):void; 
+function fn3(x:number,y:string):void;
+
+//STEP 2 
+
+// Implementing the function (only for fn3 declarations)
+function fn3(x:string|number,y?:string):void {{ '{' }} 
+    console.log(x); 
+    console.log(y); 
+} 
+
+//STEP 3
+
+// Calling overloaded functions
+fn3("abc") 
+fn3(1,"xyz");
+    </code></pre>
+
+    <h4 class="mt-5">Overloading Function Expressions</h4>
+    Since we can use type declaration to define function's call signature, we can also use it to
+    overload the function by providing multiple signatures in side the definition.
+    <pre><code class="language-javascript">
+// Overloaded function expression
+type Reserve = {{ '{' }}
+    (from: Date, to: Date, destination: string): void
+    (from: Date, destination: string): void
+}
+
+// Function implementation
+let reserve: Reserve = (
+    from: Date,
+    toOrDestination: Date | string,
+    destination?: string
+) => {{ '{' }}
+    if(typeof toOrDestination === "string"){{ '{' }}
+        console.log(`Have a great trip to ${{ '{' }}toOrDestination} on ${{ '{' }}from.toLocaleDateString()}`)
+    }else{{ '{' }}
+        console.log(`Have fun in ${{ '{' }}destination} from ${{ '{' }}from.toLocaleDateString()} to ${{ '{' }}toOrDestination.toLocaleDateString()}`)
+    }
+}
+    </code></pre>
+
+    <h4 class="mt-5">Function Overloading Tips</h4>
+    <ul>
+        <li>The signature of the implementation is not visible from the outside. When writing an
+            overloaded function, you should always have two or more signatures above the
+            implementation of the function.</li>
+        <li>Always prefer parameters with union types instead of overloads when possible</li>
+        <li>When using overloads, try to keep your implementation’s signature as specific as
+            possible to make it easier to implement the function (i.e. don't use <em>any</em> )</li>
+    </ul>
+
+
+</div>

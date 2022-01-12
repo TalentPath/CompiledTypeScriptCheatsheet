@@ -1,0 +1,159 @@
+<div id="interface-container">
+
+    <h1>Interfaces</h1>
+        <p>Interfaces are a way for Typescript to describe the shape of a complex data structure.  
+            This is done by building an interface object with the property names.
+            The type of each property is defined in the interface.  This provides the guide of the 
+            of the object that will be built.  Throughout this exercise we will build a todo list.
+            Let's start by building the Todo interface:
+        </p>
+        <div class="code">
+            <p>interface Todo &#123;</p>
+            <p class="indent">name: string,</p>       
+            <p class="indent">description: string,</p>
+            <p class="indent">daysToComplete: number</p>
+            <p>&#125;</p>
+        </div><br>
+        <p>Note that the Todo object has 3 properties: name, description and daysToComplete, 
+            which have values of string, string, and number, respectively.  To be valid it must
+            only have those 3 specific properties and they must each have their specific data type. 
+            Here are some examples of valid and invalid Todos:
+        </p><br>
+        <div class="examples">
+    
+            <div class="code">
+                <h3>Valid</h3>
+                <p>const todo1:Todo &#123;</p>
+                <p class="indent">name: 'chore',</p>       
+                <p class="indent">description: 'sweep the floors',</p>
+                <p class="indent">daysToComplete: 5</p>
+                <p>&#125;</p>
+            </div><br>
+            <div class="code">
+                <h3>Invalid</h3>
+                <p>const todo2:Todo &#123;</p>
+                <p class="indent">name: 'chore',</p>       
+                <p class="indent">description: 'sweep the floors',</p>
+                <p class="indent">daysToComplete: '5'</p>
+                <p>&#125;</p>
+                <p>// Notice that daysToComplete is a string and not a number</p>
+            </div><br>
+            <div class="code">
+                <h3>Invalid</h3>
+                <p>const todo3:Todo &#123;</p>
+                <p class="indent">name: 'chore',</p>       
+                <p class="indent">daysToComplete: 5</p>
+                <p>&#125;</p>
+                <p>// Invalid because it is missing the description property</p>
+            </div><br>
+            <div class="code">
+                <h3>Invalid</h3>
+                <p>const todo4:Todo &#123;</p>
+                <p class="indent">name: 'chore',</p>       
+                <p class="indent">description: 'sweep the floors',</p>
+                <p class="indent">daysToComplete: 5</p>
+                <p class="indent">completed: true</p>
+                <p>&#125;</p>
+                <p>// While a completed boolean is a good idea for a todo, it is not in the interface</p>
+            </div><br>
+        </div>
+        <p>Once again, to correctly follow the interface the object must have all the same properties 
+            as the interface, it must have no extra properties, and the types must match those
+            listed in the interface.</p><br>
+        <p>An interface can also be used to describe a function. Here is an example
+            of an interface implementation on a function: </p>
+        <div class="code">
+            <p>interface TodoFunc &#123;</p>
+            <p class="indent">(todo: Todo, todos: Todo[]): void</p>       
+            <p>&#125;</p>
+        </div><br>
+        <p>In this specific interface, the function will take in 2 parameters: 
+            todo which is a Todo and todos which is an array of Todos.  It then has a 
+            void return value meaning nothing is returned. Here is an example of the 
+            implementation of our TodoFunc interface:</p>
+        <div class="code">
+            <p>const addTodo:TodoFunc = (todo: Todo, todos: Todo[]) => &#123;</p>
+            <p class="indent">todos.push(todo)</p>       
+            <p>&#125;</p>
+        </div><br>
+        <p>In this function we are taking a todo and adding it to an array of todos.</p>
+        <p>Now let's see if we can build our own Todos following our todo interface</p>
+        <div class="code" id="sample">
+            <h2>Todo Interface</h2>
+            <p>interface Todo &#123;</p>
+            <p class="indent">name: string,</p>       
+            <p class="indent">description: string,</p>
+            <p class="indent">daysToComplete: number</p>
+            <p>&#125;</p>
+        </div>
+        <div id="play-box">
+            <h2>Build a Todo that fits the interface above to add it to the list:</h2>
+            <div class="code" >
+            <form id="todo-form">
+                <label class="indent" for="property">Property:</label>
+                <input #property name="property" type="text"><br>
+                <label class="indent" for="value">Value:</label>
+                <input #value name="value" type="text"><br>
+                <button (click)="addProperty(property.value, value.value, $event); property.value = ''; value.value = ''" *ngIf="submit" id="form-button" type="submit">Add</button>
+            </form>
+                <p>const todo: Todo = &#123;</p>
+                <div id="todo-inner" *ngFor="let item of todoKeys; let i = index">
+                    <p class="indent">{{item}}: {{todoValues[i]}}</p>
+                </div>
+                <p>&#125;</p>
+                <div id="success" *ngIf="success">
+                    <img src="../../assets/images/checkmark-24.png" width="16px">
+                    <p>You Got It!</p>
+                </div>
+                <div id="wrong" *ngIf="wrong">
+                    <img src="../../assets/images/x-mark-24.png" width="16px">
+                    <p>Not Quite. Try again</p>
+                </div>
+                <button id="submit" *ngIf="submit" (click)="checkAnswer($event)">Submit</button>
+                <button id="reset" (click)="reset($event)" *ngIf="active">Reset</button>
+            </div>
+        </div>
+        <div class="code">
+            <h2>Todo List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Description</td>
+                        <td>Days</td>
+                    </tr>
+                </thead>
+                <tbody id="todo-list" *ngFor="let todo of todos">
+                    <tr>
+                        <td>{{todo.name}}</td>
+                        <td>{{todo.description}}</td>
+                        <td>{{todo.daysToComplete}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div><br>
+        <h2>The differences between interfaces and types</h2>
+        <p>In modern Typescript, interfaces and types are almost interchangeable.  For the most part,
+            they act exactly the same. However, there is one key difference: once a type is defined it 
+            can't be changed while you can add properties to an interface by declaring a new interface 
+            of the same name.  The one thing you can't do is change an already defined property type.
+            let's look at an example:
+        </p><br>
+        <div class="examples">
+    
+            <div class="code">
+                <p>interface Todo &#123;</p>
+                <p class="indent">name: string,</p>       
+                <p class="indent">description: string,</p>
+                <p class="indent">daysToComplete: number</p>
+                <p>&#125;</p>
+                <p>// Our original interface</p>
+            </div><br>
+            <div class="code">
+                <p>interface Todo &#123;</p>
+                <p class="indent">completed: boolean</p>       
+                <p>&#125;</p>
+                <p>// the completed property has now been added to our interface</p>
+            </div><br>
+        </div>
+</div>

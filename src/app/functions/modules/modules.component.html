@@ -1,0 +1,50 @@
+<h2 class="mb-4">Typescript Modules</h2>
+<div class="bg-white border rounded-5 p-4">
+    <h4 class="mt-5">Modules in Javascript</h4>
+    <p>We have been using Javascripts ES Modules format to handle modules using the
+        <code>import/export</code> syntax</p>
+    <ul>
+        <li>In TypeScript any file containing a top-level import or export is considered a module
+        </li>
+        <li>You can make TypeScript treat a file as a module by adding <code>export {{ '{' }}};</code> to it
+        </li>
+        <li>TypeScript adds the ability to import and export types on top of ES Modules
+            functionality</li>
+    </ul>
+    <pre>
+        <code class="language-javascript">
+// @filename: animal.ts
+export type Cat = {{ '{' }} breed: string; yearOfBirth: number };
+export type Dog = {{ '{' }} breeds: string[]; yearOfBirth: number };
+export type Bird = {{ '{' }} breed: string; yearOfBirth: number; color: string };
+
+// @filename: main.ts
+import type {{ '{' }} Cat, Dog } from "./animal.js";    //mass import with import type
+import {{ '{' }} type Bird } from "./animal.js";        //inline type import
+        </code>
+    </pre>
+    <h4 class="mt-5 mb-3">Using ES6 modules in the browser</h4>
+    <p>The default resolution strategy set in the tsconfig is Node - which uses <code>CommonJs</code> for module resolution.</p>
+    <p>To use the ES6 syntax of Import / Export with Typescript, first define your module type to es6 in the tsconfig</p>
+    <p>Also make sure to import your main js file in the index.html with <code class="language-html">type="module"</code> set</p>
+    <pre>
+    <code class="language-json">
+// tsconfig.json
+{{ '{' }}
+    "compilerOptions": {{ '{' }}                             
+        "module": "es6"  // Tells typsecript to use the classic resolution strategy                                   
+    }
+}   
+    </code>
+    <code class="language-html">
+&#60;!-- index.html -->
+&#60;script src="main.js" type="module">&#60;/script>
+    </code>
+    <code class="language-javascript">
+// main.ts
+import Example from './example.js'  
+    </code>
+    </pre>   
+    <p class="mt-4">Note that the import file <code>example.js</code> references the javascript version, not the typescript</p>     
+    <p>By importing Example without brackets, we are assuming it is the default import. Brackets are necessary for any exports that are not default</p>
+</div>
